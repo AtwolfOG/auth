@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@layer{
+
+}
+.layout-animation{
+  animation: layout 30s linear infinite;
+}.layout-animation2{
+  animation: layout2 30s linear infinite;
+}
+
+@keyframes layout {
+  0%,100%{
+    transform: translate(0  0)
+  }
+  50%{
+    transform: translate(300px, 300px)
+  }
+}@keyframes layout2 {
+  0%,100%{
+    transform: translate(0  0)
+  }
+  50%{
+    transform: translate(-300px, 500px)
+  }
+}
+
+body{
+  width: 100vw;
+  height: 100vh;
+}
+
+#root{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.form{
+  @apply m-auto w-80 bg-green-700 backdrop-blur-md border border-white/20 rounded-3xl p-4 flex flex-col items-center
+}
+.entry{
+  animation: entry 0.5s cubic-bezier(.57,1.2,.6,1.09) forwards;
+}
+@keyframes entry{
+  from{
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to{
+    opacity: .9;
+    transform: translateY(0);
+  }
+}
