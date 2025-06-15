@@ -1,6 +1,6 @@
 import { create } from "zustand";  
 import { persist } from "zustand/middleware";
-const api: string = "http://localhost:8000";
+const api: string = import.meta.env.VITE_API_URL;
 // Zustand store for authentication state management
 interface AuthState {
   isAuthenticated: boolean;
