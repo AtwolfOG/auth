@@ -9,9 +9,9 @@ interface AuthState {
   isCheckingAuth: boolean;
   isVerified: boolean;
   error: string | null;
-  signup: (data: SignupData) => Promise<void>;
-  login: (data: { email: string; password: string }) => Promise<void>;
-  verifyEmail: (token: string) => Promise<void>;
+  signup: (data: SignupData) => Promise<string | void>;
+  login: (data: { email: string; password: string }) => Promise<string | void>;
+  verifyEmail: (token: string) => Promise<string | void>;
   checkAuth: () => Promise<void>;
   logout: () => Promise<void>;
   setResetPassword: (email: string) => Promise<string | undefined>;
@@ -63,6 +63,7 @@ const useAuthStore = create(persist<AuthState>((set) => ({
         errorMessage = error.message;
       }
       set({ error: errorMessage, isLoading: false });
+      return errorMessage;
     }
   },
   login: async ({ email, password }: { email: string; password: string }) => {
@@ -89,6 +90,8 @@ const useAuthStore = create(persist<AuthState>((set) => ({
         errorMessage = error.message;
       }
       set({ error: errorMessage, isLoading: false });
+      return errorMessage;
+
     }
   },
   verifyEmail: async (token: string) => {
@@ -110,6 +113,8 @@ const useAuthStore = create(persist<AuthState>((set) => ({
         errorMessage = error.message;
       }
       set({ error: errorMessage, isLoading: false });
+      return errorMessage;
+
     }
   },
   checkAuth: async () => {
@@ -193,6 +198,8 @@ const useAuthStore = create(persist<AuthState>((set) => ({
         errorMessage = error.message;
       }
       set({ error: errorMessage, isLoading: false });
+      return errorMessage;
+
     }
   },
   resetVerificationToken: async () =>{
@@ -215,6 +222,8 @@ const useAuthStore = create(persist<AuthState>((set) => ({
         errorMessage = error.message;
       }
       set({ error: errorMessage});
+      return errorMessage;
+
       
     }
   } 

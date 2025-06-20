@@ -13,7 +13,7 @@ import { toast, ToastContainer } from "react-toastify";
 // type Tester = [RegExp, string][];
 
 export default function Signup() {
-  const { isLoading, signup, user, error } = useAuthStore();
+  const { isLoading, signup, user} = useAuthStore();
   const [email, setEmail] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -55,9 +55,9 @@ useEffect(() =>{
   }
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    await signup({ email, password, username });
-    if (error) {
-      notifyError(error);
+    const errorMessage = await signup({ email, password, username });
+    if (errorMessage) {
+      notifyError(errorMessage);
     }
   }
 

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 export default function VerifyEmail() {
   const [code, setCode] = useState<Array<string>>(["", "", "", "", "", ""]);
   const inputRef = useRef<Array<HTMLInputElement | null>>([]);
-  const { verifyEmail, user,error, isVerified, isAuthenticated,isLoading, resetVerificationToken } = useAuthStore();
+  const { verifyEmail, user, isVerified, isAuthenticated,isLoading, resetVerificationToken } = useAuthStore();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -63,9 +63,9 @@ export default function VerifyEmail() {
     e.preventDefault();
     const token = code.join("");
     if (token.length === 6) {
-      await verifyEmail(token);
-      if (error) {
-      notify(error);
+      const errorMessage = await verifyEmail(token);
+      if (errorMessage) {
+      notify(errorMessage);
     }
     } else {
       notify("Please enter a valid 6-digit code");
@@ -81,9 +81,9 @@ export default function VerifyEmail() {
       closeOnClick: true,
     });
     async function handleResetToken() {
-     await resetVerificationToken();
-     if (error) {
-       notify(error);
+     const errorMessage = await resetVerificationToken();
+     if (errorMessage) {
+       notify(errorMessage);
      } else {
        toast.success("Verification token reset. Please check your email for the new code.",{position: "top-center",
       autoClose: 2000,

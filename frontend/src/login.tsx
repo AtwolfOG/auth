@@ -7,7 +7,7 @@ import { useAuthStore } from "./utils/stateManagement";
 export default function Login(){
     const [email, setEmail] = useState<string>("");
       const [password, setPassword] = useState<string>("");
-      const {isLoading,error, login} = useAuthStore();
+      const {isLoading, login} = useAuthStore();
       const notifyError = (message: string )=>{
         toast.error(message,{
           position: "top-center",
@@ -18,9 +18,9 @@ export default function Login(){
       }
       async function handleSubmit  (e: React.FormEvent<HTMLFormElement>)  {
         e.preventDefault();
-        await login({ email, password });
-        if (error) {
-          notifyError(error);
+       const errorMessage = await login({ email, password });
+        if (errorMessage) {
+          notifyError(errorMessage);
         }
         console.log("Login submitted with:", { email, password });
         // Add your login logic here
