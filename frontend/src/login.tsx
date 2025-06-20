@@ -16,7 +16,7 @@ export default function Login(){
           closeOnClick: true,
         })
       }
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      async function handleSubmit  (e: React.FormEvent<HTMLFormElement>)  {
         e.preventDefault();
         await login({ email, password });
         if (error) {
