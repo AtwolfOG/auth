@@ -9,7 +9,7 @@ export default function ResetPassword() {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [strength, strengthCount]: [JSX.Element[], number] =
     passwordTester(password);
-  const { isLoading, resetPassword, error, user } = useAuthStore();
+  const { isLoading, resetPassword, error,} = useAuthStore();
   const { token } = useParams<{ token: string }>();
   const navigate = useNavigate();
 
@@ -21,13 +21,9 @@ export default function ResetPassword() {
       closeOnClick: true,
       theme: "dark",
     });
-  useEffect(() => {
-    if (!user) {
-      navigate("/login", { replace: true });
-    }
-  }, [user, navigate]);
+  
 
-  console.log(isLoading, "run");
+
   const enableSubmit = strengthCount > 3 && password === confirmPassword;
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
