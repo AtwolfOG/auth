@@ -24,7 +24,7 @@ export default async function createUser(req, res) {
       verificationtokenexp,
     });
     await newUser.save();
-    sendverification(verificationtoken);
+    sendverification(verificationtoken,email);
 
     res.status(200).json({
       message: "user created successfully",

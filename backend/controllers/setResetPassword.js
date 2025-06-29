@@ -14,7 +14,7 @@ export default async function setResetPassword(req, res) {
     user.passwordresettoken = resetUrl;
     user.passwordresettokenexp = newpasswordtokenexp;
     await user.save();
-    sendResetPasswordLink(resetUrl);
+    sendResetPasswordLink(resetUrl,email);
     res.json({ resetUrl });
   } catch (error) {
     res.status(400).json({

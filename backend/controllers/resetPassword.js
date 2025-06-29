@@ -1,3 +1,4 @@
+import { passwordResetSucces } from "../mailtrap/mailtrap.js";
 import User from "../models/userSchema.js";
 import bcrypt from "bcryptjs";
 
@@ -5,6 +6,7 @@ export default async function resetPassword(req, res) {
   try {
     const { token } = req.params;
     const user = await User.findOne({ passwordresettoken: token });
+    const { email } = user;
     if (!user) {
       res.status(400).json({error:"Invalid token", message: "Invalid token" });
     }
@@ -17,6 +19,7 @@ export default async function resetPassword(req, res) {
     user.passwordresettoken = undefined;
     user.passwordresettokenexp = undefined;
     await user.save();
+    passwordResetSucces(email)
 
     res.status(200).json({
       message: "Password successfully changed",
