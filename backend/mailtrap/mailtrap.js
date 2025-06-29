@@ -53,7 +53,7 @@ export async function sendResetPasswordLink(resetUrl, email) {
     subject: "RESET PASSWORD LINK",
     html: PASSWORD_RESET_REQUEST_TEMPLATE.replace(
       "{resetURL}",
-      [request_url, resetUrl].join("/")
+      [request_url,"reset-password", resetUrl].join("/")
     ),
     // HTML body
   });
