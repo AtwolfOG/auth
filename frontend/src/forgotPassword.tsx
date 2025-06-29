@@ -3,19 +3,19 @@ import {  CiMail } from "react-icons/ci";
 import Input from "./input";
 import { useAuthStore } from "./utils/stateManagement";
 import { ToastContainer, toast } from "react-toastify";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 
 export default function ForgotPassword(){
     const [email, setEmail] = useState<string>("");
     const {setResetPassword, user } = useAuthStore();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
 
-useEffect(() => {
-    if(!user){
-      navigate("/login", { replace: true });
-    }
-  }, [user,navigate]);
+// useEffect(() => {
+//     if(!user){
+//       navigate("/login", { replace: true });
+//     }
+//   }, [user,navigate]);
     const handleForgotPassword = async (e: FormEvent<HTMLFormElement>)=>{
       e.preventDefault();
       if(!email){
@@ -27,16 +27,16 @@ useEffect(() => {
         })
         return;
       }
-      if(email.trim() !== user?.email){
-        toast.error("Email does not match the signed in user",{
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: true,
-          closeOnClick: true
-        })
-        setEmail(""); // Clear the email input if it doesn't match
-        return;
-      }
+      // if(email.trim() !== user?.email){
+      //   toast.error("Email does not match the signed in user",{
+      //     position: "top-center",
+      //     autoClose: 2000,
+      //     hideProgressBar: true,
+      //     closeOnClick: true
+      //   })
+      //   setEmail(""); // Clear the email input if it doesn't match
+      //   return;
+      // }
      const resetUrl =  await setResetPassword(email.trim());
      if(resetUrl) {
         toast.success("Password reset link sent to your email", {
@@ -45,7 +45,7 @@ useEffect(() => {
           hideProgressBar: true,
           closeOnClick: true
         });
-        navigate(`/reset-password/${resetUrl}`); // Redirect to reset password page after sending the reset link
+        // navigate(`/reset-password/${resetUrl}`); // Redirect to reset password page after sending the reset link
       }
     }
       return (<>
